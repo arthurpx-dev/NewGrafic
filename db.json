@@ -1,0 +1,50 @@
+[
+  {
+    "Mês": "JAN",
+    "VendaFigura": "21"
+  },
+  {
+    "Mês": "FEVEREIRO",
+    "VendaFigura": "56"
+  },
+  {
+    "Mês": "MAR",
+    "VendaFigura": "4"
+  },
+  {
+    "Mês": "ABRIL",
+    "VendaFigura": "61"
+  },
+  {
+    "Mês": "MAR",
+    "VendaFigura": "45"
+  },
+  {
+    "Mês": "JUNHO",
+    "VendaFigura": "56"
+  },
+  {
+    "Mês": "JUL",
+    "VendaFigura": "12"
+  },
+  {
+    "Mês": "AGO",
+    "VendaFigura": "31"
+  },
+  {
+    "Mês": "SET",
+    "VendaFigura": "37"
+  },
+  {
+    "Mês": "OUTUBRO",
+    "VendaFigura": "42"
+  },
+  {
+    "Mês": "NOV",
+    "VendaFigura": "79"
+  },
+  {
+    "Mês": "DEZEMBRO",
+    "VendaFigura": "11"
+  }
+]
