@@ -11,3 +11,10 @@ export class ServicesService {
     return this.http.get('http://localhost:3000/sales');
   }
 }
+
+
+// getChartDataByYear(year: number): Observable<any[]> {
+//   return this.chartData$.pipe(
+//     map((chartData) => chartData.filter((item) => item.year === year))
+//   );
+// }

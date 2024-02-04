@@ -1,34 +1,104 @@
 {
+  "users": [
+    {
+      "id": 12345,
+      "name": "Arthur"
+    },
+    {
+      "id": 67890,
+      "name": "Rodrigo"
+    }
+  ],
   "sales": [
     {
       "year": 2015,
       "amount": 1000,
-      "colorcode": "rgba(255,99,132,0.2)"
+      "colorcode": "DOC_ASS",
+      "userId": 12345
     },
     {
-      "year": 20126,
-      "amount": 3000,
-      "colorcode": "blue"
+      "year": 2016,
+      "amount": 8000,
+      "colorcode": "DOC_EN",
+      "userId": 67890
     },
     {
-      "year": 2017,
-      "amount": 3000,
-      "colorcode": "grey"
+      "year": 2016,
+      "amount": 2000,
+      "colorcode": "DOC_ASS",
+      "userId": 12345
     },
     {
       "year": 2018,
       "amount": 6500,
-      "colorcode": "red"
+      "colorcode": "DOC_EN",
+      "userId": 67890
     },
     {
-      "year": 2019,
+      "year": 2016,
       "amount": 4000,
-      "colorcode": "green"
+      "colorcode": "DOC_EN",
+      "userId": 12345
+    },
+    {
+      "year": 2017,
+      "amount": 1000,
+      "colorcode": "DOC_ASS",
+      "userId": 67890
+    },
+    {
+      "year": 2015,
+      "amount": 1000,
+      "colorcode": "DOC_ASS",
+      "userId": 12345
     },
     {
       "year": 2020,
+      "amount": 3000,
+      "colorcode": "DOC_EN",
+      "userId": 67890
+    },
+    {
+      "year": 2024,
+      "amount": 2000,
+      "colorcode": "DOC_ASS",
+      "userId": 12345
+    },
+    {
+      "year": 2017,
+      "amount": 6500,
+      "colorcode": "DOC_EN",
+      "userId": 67890
+    },
+    {
+      "year": 2017,
+      "amount": 4000,
+      "colorcode": "DOC_ASS",
+      "userId": 12345
+    },
+    {
+      "year": 2016,
       "amount": 7000,
-      "colorcode": "orange"
+      "colorcode": "DOC_EN",
+      "userId": 67890
+    },
+    {
+      "year": 2024,
+      "amount": 9000,
+      "colorcode": "DOC_ASS",
+      "userId": 67890
+    },
+    {
+      "year": 2024,
+      "amount": 8000,
+      "colorcode": "DOC_ENV",
+      "userId": 12345
+    },
+    {
+      "year": 2017,
+      "amount": 8000,
+      "colorcode": "DOC_ENV",
+      "userId": 12345
     }
   ]
 }
