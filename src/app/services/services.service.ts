@@ -5,11 +5,22 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ServicesService {
+
+
   constructor(private http: HttpClient) {}
 
-  Getchartinfo() {
-    return this.http.get('http://localhost:3000/sales');
+  getChartDataByUserId(userId: number) {
+    return this.http.get<any[]>('http://localhost:3000/sales', {
+      params: { userId: userId.toString() },
+    });
   }
+
+
+  // constructor(private http: HttpClient) {}
+
+  // Getchartinfo() {
+  //   return this.http.get('http://localhost:3000/sales');
+  // }
 }
 
 

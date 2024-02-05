@@ -1,6 +1,6 @@
-// mychart.component.ts
+
 import { Component, OnInit } from '@angular/core';
-import { Chart, registerables, ChartType } from 'chart.js';
+import { Chart, registerables } from 'chart.js';
 import { ServicesService } from '../services/services.service';
 import { AuthService } from '../services/auth.service';
 import { AuthenticationService } from '../services/authentication.service';
@@ -8,22 +8,22 @@ import { AuthenticationService } from '../services/authentication.service';
 @Component({
   selector: 'app-mychart',
   templateUrl: './mychart.component.html',
-  styleUrl: './mychart.component.scss',
+  styleUrls: ['./mychart.component.scss'],
 })
 export class MychartComponent implements OnInit {
-  constructor(
-    private service: ServicesService,
-    public authService: AuthService,
-    private autheticationService: AuthenticationService
-  ) {}
-
   chartdata: any;
-  data: any[] = [];
+  data: number[] = [];
   doc1: any = [];
   doc2: any[] = [];
 
   private docAssAmounts: number[] = [];
   private docEnAmounts: number[] = [];
+
+  constructor(
+    private service: ServicesService,
+    public authService: AuthService,
+    private authenticationService: AuthenticationService
+  ) {}
 
   get docAssinados(): number[] {
     return this.docAssAmounts;
@@ -36,9 +36,9 @@ export class MychartComponent implements OnInit {
   get loggedInUser() {
     return this.authService.loggedInUser;
   }
+
   private filtrarDados(): void {
-    for (let i = 0; i < this.data.length; i++) {
-      const year = this.data[i];
+    this.data = this.data.map((year) => {
       const docAssAmount = this.chartdata
         .filter((item: any) => item.year === year && item.colorcode === 'DOC_ASS')
         .reduce((total: number, item: any) => total + item.amount, 0);
@@ -49,31 +49,65 @@ export class MychartComponent implements OnInit {
 
       this.docAssAmounts.push(docAssAmount);
       this.docEnAmounts.push(docEnAmount);
-    }
+
+      return year;
+    });
   }
 
   ngOnInit(): void {
     if (this.authService.isUserAuthenticated()) {
-      this.autheticationService.getUserSales().subscribe((result: any[]) => {
-        this.chartdata = result;
-        if (this.chartdata != null) {
-          // Extrair anos únicos e ordená-los
-          const uniqueYears: number[] = Array.from(
-            new Set(this.chartdata.map((item: any) => item.year))
-          );
-          this.data = uniqueYears.sort((a, b) => a - b);
+      const loggedInUser = this.authenticationService.loggedInUser;
 
-          // Usar o método privado para filtrar dados
-          this.filtrarDados();
+      if (loggedInUser) {
+        this.service.getChartDataByUserId(loggedInUser.id).subscribe((result: any[]) => {
+          this.chartdata = result;
 
-          console.log(this.docAssinados);
-          console.log(this.docEnviados);
+          if (this.chartdata != null) {this.data = (Array.from(new Set(this.chartdata.map((item: any) => item.year))) as number[]).sort((a, b) => a - b);
 
-          this.RenderChart(this.data, this.docAssAmounts, this.docEnAmounts, 'bar', 'barchart');
-        }
-      });
+            
+
+            this.filtrarDados();
+
+            console.log(this.docAssinados);
+            console.log(this.docEnviados);
+
+            this.RenderChart(
+              this.data,
+              this.docAssAmounts,
+              this.docEnAmounts,
+              'bar',
+              'barchart'
+            );
+          }
+        });
+      }
     }
   }
+
+
+
+  // ngOnInit(): void {
+  //   if (this.authService.isUserAuthenticated()) {
+  //     this.autheticationService.getUserSales().subscribe((result: any[]) => {
+  //       this.chartdata = result;
+  //       if (this.chartdata != null) {
+  //         // Extrair anos únicos e ordená-los
+  //         const uniqueYears: number[] = Array.from(
+  //           new Set(this.chartdata.map((item: any) => item.year))
+  //         );
+  //         this.data = uniqueYears.sort((a, b) => a - b);
+
+  //         // Usar o método privado para filtrar dados
+  //         this.filtrarDados();
+
+  //         console.log(this.docAssinados);
+  //         console.log(this.docEnviados);
+
+  //         this.RenderChart(this.data, this.docAssAmounts, this.docEnAmounts, 'bar', 'barchart');
+  //       }
+  //     });
+  //   }
+  // }
 
   RenderChart(
     labeldata: any,
@@ -91,17 +125,19 @@ export class MychartComponent implements OnInit {
             label: 'Documentos Assinados',
             data: colordata,
             backgroundColor: 'blue',
+           
           },
           {
             label: 'Documentos Enviados',
             data: colordata2,
             backgroundColor: 'red',
+            
           },
           {
             label: 'Line Dataset',
             data: [1000, 2000, 4000, 10000],
             type: 'line',
-            order: 1,
+            order: 2,
           },
         ],
       },
